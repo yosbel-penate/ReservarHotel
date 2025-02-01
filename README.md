@@ -1,8 +1,4 @@
-
-
-## Aquí está la descripción del proyecto formateada en Markdown:
-
-Descripción del Proyecto de Gestión Hotelera
+## Descripción del Proyecto de Gestión Hotelera
 El tema de este proyecto se centra en el diseño y desarrollo de un sistema de gestión para un establecimiento hotelero utilizando la arquitectura hexagonal (también conocida como arquitectura de puertos y adaptadores). El objetivo principal es crear una aplicación que maneje eficientemente las operaciones clave relacionadas con la gestión de habitaciones, reservas y clientes de un hotel.
 
 # Dominio del Hotel
