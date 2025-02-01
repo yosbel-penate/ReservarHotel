@@ -1,5 +1,7 @@
 from typing import List, Optional
-
+from ..domain.cliente import Cliente
+from ..domain.reserva import Reserva
+from ..ports.reserva_repository import ReservaRepository
 
 class ReservaDatabaseAdapter(ReservaRepository):
     def __init__(self, db):

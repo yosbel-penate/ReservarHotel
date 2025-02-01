@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Optional
-
+from ..domain.reserva import Reserva
+from ..domain.cliente import Cliente
 
 class ReservaRepository(ABC):
     @abstractmethod

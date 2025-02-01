@@ -1,3 +1,6 @@
+from ..domain.cliente import Cliente
+from ..ports.cliente_repository import ClienteRepository
+
 class GestionClientes:
     def __init__(self, cliente_repository: ClienteRepository):
         self.cliente_repository = cliente_repository

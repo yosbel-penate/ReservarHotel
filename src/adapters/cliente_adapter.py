@@ -1,5 +1,6 @@
 from typing import Optional
-
+from ..domain.cliente import Cliente
+from ..ports.cliente_repository import ClienteRepository
 
 class ClienteDatabaseAdapter(ClienteRepository):
     def __init__(self, db):

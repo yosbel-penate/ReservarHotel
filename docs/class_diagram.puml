@@ -1,0 +1,111 @@
+@startuml
+hide stereotypes
+
+' Domain
+class Habitacion {
+    - id : int
+    - numero : int
+    - tipo : string
+    - comodidades : List<Comodidad>
+}
+
+class Comodidad {
+    - nombre : string
+    - descripcion : string
+}
+
+class Reserva {
+    - id : int
+    - fechaLlegada : Date
+    - fechaSalida : Date
+    - cliente : Cliente
+    - habitacion : Habitacion
+}
+
+class Cliente {
+    - id : int
+    - nombre : string
+    - informacionContacto : string
+}
+
+' Ports (Interfaces)
+interface HabitacionRepository {
+    + obtenerHabitacionPorId(id : int) : Habitacion
+    + obtenerHabitacionesDisponibles(fechaLlegada : Date, fechaSalida : Date) : List<Habitacion>
+    + guardarHabitacion(habitacion : Habitacion) : void
+}
+
+interface ReservaRepository {
+    + obtenerReservaPorId(id : int) : Reserva
+    + obtenerReservasPorCliente(cliente : Cliente) : List<Reserva>
+    + guardarReserva(reserva : Reserva) : void
+}
+
+interface ClienteRepository {
+    + obtenerClientePorId(id : int) : Cliente
+    + obtenerClientePorNombre(nombre : string) : Cliente
+    + guardarCliente(cliente : Cliente) : void
+}
+
+' Adapters (Implementations)
+class HabitacionDatabaseAdapter implements HabitacionRepository {
+    - db : Database // Simula la conexión a la base de datos
+    + obtenerHabitacionPorId(id : int) : Habitacion
+    + obtenerHabitacionesDisponibles(fechaLlegada : Date, fechaSalida : Date) : List<Habitacion>
+    + guardarHabitacion(habitacion : Habitacion) : void
+}
+
+class ReservaDatabaseAdapter implements ReservaRepository {
+    - db : Database // Simula la conexión a la base de datos
+    + obtenerReservaPorId(id : int) : Reserva
+    + obtenerReservasPorCliente(cliente : Cliente) : List<Reserva>
+    + guardarReserva(reserva : Reserva) : void
+}
+
+class ClienteDatabaseAdapter implements ClienteRepository {
+    - db : Database // Simula la conexión a la base de datos
+    + obtenerClientePorId(id : int) : Cliente
+    + obtenerClientePorNombre(nombre : string) : Cliente
+    + guardarCliente(cliente : Cliente) : void
+}
+
+' Application Services (Use Cases)
+class GestionHabitaciones {
+    - habitacionRepository : HabitacionRepository
+    + crearHabitacion(habitacion : Habitacion) : void
+    + modificarHabitacion(habitacion : Habitacion) : void
+    + eliminarHabitacion(id : int) : void
+}
+
+class GestionReservas {
+    - reservaRepository : ReservaRepository
+    - habitacionRepository : HabitacionRepository
+    - clienteRepository : ClienteRepository
+    + crearReserva(reserva : Reserva) : void
+    + cancelarReserva(id : int) : void
+    + buscarHabitacionesDisponibles(fechaLlegada : Date, fechaSalida : Date) : List<Habitacion>
+}
+
+class GestionClientes {
+    - clienteRepository : ClienteRepository
+    + crearCliente(cliente : Cliente) : void
+    + modificarCliente(cliente : Cliente) : void
+    + eliminarCliente(id : int) : void
+}
+
+' Relationships
+Habitacion "1" *-- "many" Comodidad : tiene
+Reserva "1" *-- "1" Cliente : realizada por
+Reserva "1" *-- "1" Habitacion : asignada a
+
+GestionHabitaciones --> HabitacionRepository : usa
+GestionReservas --> ReservaRepository : usa
+GestionReservas --> HabitacionRepository : usa
+GestionReservas --> ClienteRepository : usa
+GestionClientes --> ClienteRepository : usa
+
+HabitacionDatabaseAdapter -- Database : interactúa con
+ReservaDatabaseAdapter -- Database : interactúa con
+ClienteDatabaseAdapter -- Database : interactúa con
+
+@enduml

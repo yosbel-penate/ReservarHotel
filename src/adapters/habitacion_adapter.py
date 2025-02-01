@@ -1,6 +1,7 @@
 from typing import List, Optional
 from datetime import date
-
+from ..domain.habitacion import Habitacion
+from ..ports.habitacion_repository import HabitacionRepository
 
 class HabitacionDatabaseAdapter(HabitacionRepository):
     def __init__(self, db):

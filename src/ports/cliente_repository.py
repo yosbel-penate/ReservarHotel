@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Optional
+from ..domain.cliente import Cliente
 
 class ClienteRepository(ABC):
     @abstractmethod

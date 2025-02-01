@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Optional
 from datetime import date
+from ..domain.habitacion import Habitacion
 
 class HabitacionRepository(ABC):
     @abstractmethod
