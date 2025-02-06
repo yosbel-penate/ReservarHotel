@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-class Cliente(BaseModel):
+class ClienteAnotacion(BaseModel):
     id: int
     nombre: str
     informacion_contacto: str
