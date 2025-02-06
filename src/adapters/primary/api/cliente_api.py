@@ -1,10 +1,14 @@
 from fastapi import FastAPI, Depends, HTTPException
 from typing import List
-from src.domain.cliente import Cliente
-from src.services.gestion_clientes import GestionClientes
-from src.adapters.secundary.orm.sqlalchemy_cliente_repository import SQLAlchemyClienteRepository
+from .anotaciones.cliente import Cliente
+from services.gestion_clientes import GestionClientes
+from adapters.secondary.orm.sqlalchemy_cliente_repository import SQLAlchemyClienteRepository
 
-app = FastAPI()
+app = FastAPI(
+    title="API de Gestión de Clientes del Hotel",
+    description="Esta es la API para gestionar clientes en el sistema de reservas del hotel.",
+    version="1.0.0"
+)
 
 def get_gestion_clientes() -> GestionClientes:
     cliente_repository = SQLAlchemyClienteRepository(database_url="sqlite:///./test.db")
